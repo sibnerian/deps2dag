@@ -39,6 +39,7 @@
     "babylon": "^6.15.0",
     "babylon-walk": "^1.0.2",
     "deline": "^1.0.4",
+    "es6-promise": "^4.0.5",
     "es6-promisify": "^5.0.0",
     "lodash": "^4.17.4",
     "toposort-object": "^1.0.1"
