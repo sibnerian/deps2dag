@@ -1,0 +1,46 @@
+{
+  "name": "deps2dag",
+  "version": "0.0.1",
+  "description": "Transform node.js dependencies into a directed graph.",
+  "main": "build/index.js",
+  "bin": "./build/bin/deps2dag.js",
+  "scripts": {
+    "pretest": "npm run --silent lint && npm run build",
+    "test": "npm run tests-only",
+    "tests-only": "mocha test/**/*spec.js",
+    "lint": "eslint .",
+    "build": "mkdirp build && babel src --out-dir build --source-maps",
+    "prepublish": "npm run build",
+    "clean": "rimraf build"
+  },
+  "keywords": [
+    "dag",
+    "graph",
+    "dependencies"
+  ],
+  "author": "Ian Sibner <sibnerian@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-airbnb": "^2.1.1",
+    "babel-register": "^6.18.0",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "eslint": "^3.13.1",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "gulp-eslint": "^3.0.1",
+    "mkdirp": "^0.5.1",
+    "mocha": "^3.2.0",
+    "rimraf": "^2.5.4"
+  },
+  "dependencies": {
+    "babel-types": "^6.21.0",
+    "babylon": "^6.15.0",
+    "babylon-walk": "^1.0.2",
+    "deline": "^1.0.4",
+    "es6-promisify": "^5.0.0",
+    "lodash": "^4.17.4",
+    "toposort-object": "^1.0.1"
+  }
+}
