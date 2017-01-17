@@ -22,8 +22,8 @@ function onError(e) {
 
 program
   .version('0.0.1')
-  .option('-i, --ignore [ignoreGlob]', 'Ignore files', collect, [])
-  .option('-o, --outfile [outfile]', 'Output files. Prints to stdout if none are specified.', collect, [])
+  .option('-i, --ignore [ignoreGlob]', 'A glob file pattern to ignore. This option can be used more than once to ignore multiple patterns.', collect, [])
+  .option('-o, --outfile [outfile]', 'A path to write the JSON results. This option can be used more than once for multiple outfiles. If none are specified, prints to stdout.', collect, [])
   .option('--babylon-plugins [plugins]', 'Comma separated list of babylon plugins to use.')
   .arguments('[globs...]')
   .action((fileGlobs, { ignore: ignoreGlobs, outfile: outFiles, babylonPlugins }) => {
