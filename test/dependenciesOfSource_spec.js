@@ -9,14 +9,14 @@ describe('dependenciesOfSource', () => {
       const x = require('./foo/bar');
       import * as foo from './foo/baz';
     `;
-    expect(dependenciesOfSource(src)).to.eql(['./foo/bar', './foo/baz']);
+    expect(dependenciesOfSource('filename.js', src)).to.eql(['./foo/bar', './foo/baz']);
   });
   it('throws when the arg to require is not a string literal', () => {
     const src = `
       const y = './bar/foo';
       const x = require(y);
     `;
-    const doIt = () => dependenciesOfSource(src);
+    const doIt = () => dependenciesOfSource('filename.js', src);
     expect(doIt).to.throw(Error, /dynamic dependency/i);
   });
 });
