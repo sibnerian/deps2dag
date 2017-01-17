@@ -1,4 +1,5 @@
 import * as t from 'babel-types';
+import deline from 'deline';
 import { parse } from 'babylon';
 
 // hates being imported for some reason
@@ -18,20 +19,26 @@ const visitors = {
   },
 };
 
-export default function dependenciesOfSource(source, babylonPlugins = []) {
-  const babylonOpts = { sourceType: 'module', plugins: babylonPlugins };
-  const ast = parse(source, babylonOpts);
-  const state = {
-    importsOrRequires: [],
-  };
+export default function dependenciesOfSource(filename, source, babylonPlugins = []) {
   try {
+    const babylonOpts = { sourceType: 'module', plugins: babylonPlugins };
+    const ast = parse(source, babylonOpts);
+    const state = {
+      importsOrRequires: [],
+    };
     walk.simple(ast, visitors, state);
+    return state.importsOrRequires;
   } catch (e) {
     if (e.message && e.message.indexOf('Expected type "StringLiteral"') >= 0) {
-      throw new Error('Found dynamic dependency. All dependencies must be string literals.');
+      throw new Error(deline`
+        Found dynamic dependency in ${filename}. All dependencies must be string literals.
+      `);
     } else {
-      throw e;
+      throw new Error(deline`
+        Encountered exception while parsing ${filename}.
+        
+        Original error: ${e}
+      `);
     }
   }
-  return state.importsOrRequires;
 }

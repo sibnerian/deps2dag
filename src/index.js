@@ -9,7 +9,7 @@ import dependenciesOfSource from './dependenciesOfSource';
 
 export default function deps2dag(files, babylonPlugins = []) {
   return Promise.all(files.map(readFile))
-    .then(sources => sources.map(s => dependenciesOfSource(s, babylonPlugins)))
+    .then(sources => sources.map((s, i) => dependenciesOfSource(files[i], s, babylonPlugins)))
     .then(dependencies => zipObject(files, dependencies))
     .then(normalizeDependencyGraph)
     .then(checkDag);
