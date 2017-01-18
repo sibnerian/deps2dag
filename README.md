@@ -11,7 +11,7 @@ npm install --save deps2dag
 ## Example (CLI):
 
 ```sh
-deps2dag -i "node_modules/**/*" -i "test/**/*""**/*.js"
+deps2dag -i "node_modules/**/*" -i "test/**/*" "**/*.js"
 ```
 
 ## CLI Options
